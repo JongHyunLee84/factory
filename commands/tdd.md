@@ -15,49 +15,29 @@ Read these files BEFORE writing any code:
 3. `tasks/requirements.md` — requirement IDs for traceability
 4. `tasks/si-progress.json`
 
-## Core Principle
-**No production code without a failing test first.**
+## Execution
 
-## Execution Flow
+### Step 1: Extract Test Plan
 
-### Step 1: Test Plan from Acceptance Criteria
-
-Extract all Given/When/Then scenarios from `tasks/design.md` section 8.
+Extract all Given/When/Then scenarios from `tasks/design.md` section 9 (Acceptance Criteria).
 Create a test plan mapping:
 
-| AC ID | Test Type | Test File | Status |
-|-------|-----------|-----------|--------|
-| AC-001 | Unit / Integration / E2E | [path] | Pending |
-| AC-002 | Unit / Integration / E2E | [path] | Pending |
+| AC ID | Requirement | Test Type | Test File | Status |
+|-------|-------------|-----------|-----------|--------|
+| AC-001 | FR-001 | Unit / Integration / E2E | [path] | Pending |
 
-**Test Type Selection**:
-- Pure logic, data transformation → Unit test
-- DB, API, file I/O → Integration test
-- Full user flow → E2E (defer to /si:e2e phase)
+### Step 2: Invoke TDD Skill
 
-### Step 2: Red-Green-Refactor Cycles
+Call `Skill("si:tdd")` to execute R-G-R cycles for each acceptance criterion.
 
-For each acceptance criterion, in priority order:
+The skill enforces:
+- The Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+- Mandatory RED verification (test must fail for the right reason)
+- Mandatory GREEN verification (test passes, no regressions)
+- REFACTOR only after GREEN, no behavior changes
+- Testing anti-patterns prevention (no mock testing, no test-only prod methods)
 
-#### RED: Write Failing Test
-1. Create test file following project conventions
-2. Write test that directly maps to the Given/When/Then scenario
-3. Run test — confirm it FAILS for the right reason
-4. If test passes immediately → the feature already exists or test is wrong. Investigate.
-
-#### GREEN: Minimal Implementation
-1. Write the MINIMUM code to make the test pass
-2. No optimization, no cleanup, no extra features
-3. Run test — confirm it PASSES
-4. Run ALL existing tests — confirm no regressions
-
-#### REFACTOR: Clean Up
-1. Remove duplication introduced in GREEN step
-2. Improve naming, extract functions if clarity improves
-3. Run ALL tests — confirm still passing
-4. If refactoring changes behavior → STOP, revert, re-approach
-
-### Step 3: Cycle Tracking
+### Step 3: Track Cycles
 
 After each R-G-R cycle, update the test plan:
 
@@ -67,39 +47,13 @@ AC-002: 🔴 Red (writing test...)
 AC-003: ⏳ Pending
 ```
 
-### Step 4: Edge Cases & Error Paths
+### Step 4: Regression Guard
 
-After all acceptance criteria have passing tests:
-1. Review `tasks/design.md` section 7 (Error Handling)
-2. Write tests for each error scenario
-3. Implement error handling using R-G-R
-
-### Step 5: Regression Guard
-
-Run the full test suite:
-```
-[project-specific test command]
-```
-
-Report results:
+Run the full test suite and report:
 - Total tests: N
 - Passing: N
 - Failing: N (list each with file:line)
 - New tests added this phase: N
-
-## Rules
-
-1. **One cycle at a time** — complete R-G-R for one AC before starting the next
-2. **Test names describe behavior** — not implementation (`"should display error when login fails"` not `"test handleLoginError"`)
-3. **No mocking what you own** — mock external dependencies only
-4. **Smallest possible assertions** — one logical assertion per test
-5. **Tests are documentation** — reading tests should explain the feature
-
-## Output
-
-Tests are written directly in the project codebase following existing test conventions.
-
-Update the test plan in `tasks/design.md` or create `tasks/test-results.md` if needed.
 
 ## Update Progress
 

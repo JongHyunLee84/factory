@@ -1,6 +1,6 @@
 ---
 name: acceptance
-description: 최종 검증 — 준수율 채점 + 체크리스트 (shinpr 정량 채점 패턴)
+description: 최종 검증 — 준수율 채점 + 체크리스트 (정량 채점 패턴)
 user_invocable: true
 ---
 
@@ -15,111 +15,29 @@ Read ALL project artifacts:
 3. `tasks/analysis.md` — selected approach
 4. `tasks/si-progress.json`
 
-## Execution Flow
+## Execution
 
-### Step 1: Acceptance Criteria Scoring
+### Step 1: Invoke Code Review Skill
 
-For EACH acceptance criterion from `tasks/design.md`:
+Call `Skill("si:code-review")` to execute the full review protocol:
+- Acceptance criteria scoring matrix (per AC verdict: ✅/⚠️/❌)
+- Compliance score calculation (✅ count / total × 100)
+- Issue classification by severity (Critical / Important / Minor)
+- Quality checklist (Behavior, Testing, Build, Documentation)
+- Deviation report (if compliance < 100%)
 
-| AC ID | Requirement | Test Status | Implementation Status | Verdict |
-|-------|-------------|-------------|----------------------|---------|
-| AC-001 | FR-001 | Pass/Fail/No Test | Complete/Partial/Missing | ✅/⚠️/❌ |
+The skill produces the complete acceptance report at `tasks/acceptance-report.md`.
 
-**Verdict Rules**:
-- ✅ Pass: Test passes AND implementation matches design
-- ⚠️ Partial: Test passes but implementation deviates OR minor gaps
-- ❌ Fail: Test fails OR implementation missing
+### Step 2: Verify Output
 
-### Step 2: Compliance Score
+After the skill completes, verify:
+- `tasks/acceptance-report.md` exists
+- Compliance score is calculated
+- All AC IDs from design are accounted for
+- Issues have file:line references
+- Verdict matches threshold (90%+ PASS / 70-89% NEEDS IMPROVEMENT / <70% REDESIGN)
 
-```
-Compliance = (✅ count / total AC count) × 100
-
-Score: [N]% ([✅ count]/[total])
-```
-
-| Score | Verdict | Action |
-|-------|---------|--------|
-| 90%+ | **PASS** | Ready for deployment/merge |
-| 70-89% | **NEEDS IMPROVEMENT** | Fix identified gaps, re-run acceptance |
-| <70% | **REDESIGN** | Return to Architect phase, fundamental issues |
-
-### Step 3: Quality Checklist
-
-Check each item and record evidence:
-
-#### Behavior
-- [ ] All functional requirements implemented
-- [ ] All non-functional requirements met (or documented exceptions)
-- [ ] Error handling covers design scenarios
-- [ ] Edge cases from design addressed
-
-#### Testing
-- [ ] Unit tests pass
-- [ ] Integration tests pass
-- [ ] E2E tests pass
-- [ ] No test flakiness observed
-
-#### Build & Tooling
-- [ ] Project builds without errors
-- [ ] Linter passes (or documented suppressions)
-- [ ] Type check passes (if applicable)
-- [ ] No new warnings introduced
-
-#### Documentation & Code Quality
-- [ ] Code follows project conventions (from analysis)
-- [ ] Public interfaces match design signatures
-- [ ] No debug code or temporary hacks left
-- [ ] Change scope matches Change Impact Map
-
-### Step 4: Deviation Report
-
-If compliance < 100%, list each deviation:
-
-```markdown
-### DEV-001: [AC ID] [Title]
-- **Gap**: [what's missing or different]
-- **Severity**: Critical / Major / Minor
-- **Recommendation**: [specific action to resolve]
-```
-
-### Step 5: Final Report
-
-Write to `tasks/acceptance-report.md`:
-
-```markdown
-# Acceptance Report: [Project Name]
-
-## Summary
-- **Date**: [ISO 8601]
-- **Compliance Score**: [N]%
-- **Verdict**: PASS / NEEDS IMPROVEMENT / REDESIGN
-
-## Scoring Detail
-[Table from Step 1]
-
-## Quality Checklist
-[Results from Step 3]
-
-## Deviations
-[From Step 4, if any]
-
-## Verification Evidence
-- Test command: [command]
-- Test results: [N/N passing]
-- Build command: [command]
-- Build result: [success/failure]
-- Lint command: [command]
-- Lint result: [N warnings, N errors]
-
-## Sign-off
-- [ ] All acceptance criteria reviewed
-- [ ] Compliance score calculated
-- [ ] Quality checklist completed
-- [ ] Deviations documented (if any)
-```
-
-### Step 6: Present to User
+### Step 3: Present to User
 
 Display the summary:
 ```
@@ -135,7 +53,7 @@ If NEEDS IMPROVEMENT or REDESIGN:
 - List the top 3 critical deviations
 - Suggest which phase to return to
 
-## Update Progress
+### Step 4: Update Progress
 
 Update `tasks/si-progress.json`:
 - Set `phases.acceptance.status = "completed"`
