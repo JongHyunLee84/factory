@@ -15,7 +15,7 @@ Research → PRD → Analysis → Architect → UI Design → TDD → Develop �
 /plugin marketplace add JongHyunLee84/si
 
 # 설치
-claude plugin install si@JongHyunLee84/si
+/plugin install si@si
 ```
 
 ## 프로젝트 구조

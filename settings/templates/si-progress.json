@@ -32,6 +32,13 @@
       "gateApproved": false,
       "completedAt": null
     },
+    "ui-design": {
+      "status": "pending",
+      "artifacts": [],
+      "gate": true,
+      "gateApproved": false,
+      "completedAt": null
+    },
     "tdd": {
       "status": "pending",
       "artifacts": [],

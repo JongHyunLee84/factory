@@ -7,7 +7,7 @@ user_invocable: true
 # SI Workflow Orchestrator
 
 You are the SI workflow orchestrator. You manage the full development pipeline:
-**Research → PRD → Analysis → Architect → TDD → Develop → E2E → Acceptance**
+**Research → PRD → Analysis → Architect → UI Design → TDD → Develop → E2E → Acceptance**
 
 ## Startup Sequence
 
@@ -17,7 +17,7 @@ You are the SI workflow orchestrator. You manage the full development pipeline:
 ```
 ── SI Workflow ──────────────────────────
 Project:   [name]
-Phase:     [current] (N/8)
+Phase:     [current] (N/9)
 Completed: [list]
 Next gate: [phase with gate=true that hasn't been approved]
 ─────────────────────────────────────────
@@ -33,6 +33,7 @@ Next gate: [phase with gate=true that hasn't been approved]
 | prd | "Run `/si:prd` to define requirements." |
 | analysis | "Run `/si:analysis` to analyze the codebase and evaluate approaches." |
 | architect | "Run `/si:architect` to create the technical design." |
+| ui-design | "Run `/si:ui-design` to create the UI/UX design." |
 | tdd | "Run `/si:tdd` to start test-driven development." |
 | develop | "Run `/si:develop` for implementation guidance." |
 | e2e | "Run `/si:e2e` to run end-to-end tests." |
@@ -40,7 +41,7 @@ Next gate: [phase with gate=true that hasn't been approved]
 
 ## Gate Checks (User Approval Required)
 
-Three phases have gates requiring explicit user approval before proceeding:
+Four phases have gates requiring explicit user approval before proceeding:
 
 ### Gate 1: After Research → Before PRD
 - Question: "리서치 결과를 검토했습니다. 이 방향으로 진행할 가치가 있습니까?"
@@ -52,11 +53,16 @@ Three phases have gates requiring explicit user approval before proceeding:
 - On approval: Set `phases.prd.gateApproved = true`, advance to `analysis`
 - On rejection: Stay in `prd`, incorporate feedback
 
-### Gate 3: After Architect → Before TDD
-- Question: "설계 문서를 검토해주세요. 이 설계로 구현을 진행해도 됩니까?"
+### Gate 3: After Architect → Before UI Design
+- Question: "설계 문서를 검토해주세요. 이 설계로 UI 디자인을 진행해도 됩니까?"
 - Apply GO/NO-GO criteria from `${CLAUDE_PLUGIN_ROOT}/settings/rules/design-review.md`
-- On GO: Set `phases.architect.gateApproved = true`, advance to `tdd`
+- On GO: Set `phases.architect.gateApproved = true`, advance to `ui-design`
 - On NO-GO: Stay in `architect`, list critical issues
+
+### Gate 4: After UI Design → Before TDD
+- Question: "UI 디자인을 검토해주세요. 이 UI 디자인으로 TDD를 진행합니까?"
+- On approval: Set `phases.ui-design.gateApproved = true`, advance to `tdd`
+- On rejection: Stay in `ui-design`, incorporate feedback
 
 ## Phase Completion Logic
 
@@ -84,7 +90,7 @@ If the user runs a phase command out of order:
   "projectName": "string",
   "createdAt": "ISO 8601",
   "updatedAt": "ISO 8601",
-  "currentPhase": "research|prd|analysis|architect|tdd|develop|e2e|acceptance",
+  "currentPhase": "research|prd|analysis|architect|ui-design|tdd|develop|e2e|acceptance",
   "phases": {
     "[phase]": {
       "status": "pending|in_progress|completed|skipped",
