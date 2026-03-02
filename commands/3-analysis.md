@@ -115,14 +115,16 @@ For each new component, score against existing code:
 
 Write to `tasks/analysis.md` using template from `${CLAUDE_PLUGIN_ROOT}/settings/templates/analysis.md`.
 
-Also produce a JSON summary appended to `tasks/si-progress.json` phases.analysis:
+Also update `tasks/si-progress.json` `phases.analysis.data` with:
 ```json
 {
   "scale": "S|M|L",
   "filesAffected": 0,
   "gapCount": { "missing": 0, "unknown": 0, "constraint": 0 },
   "selectedOption": "A|B|C",
-  "escalations": []
+  "escalations": [
+    { "item": "string (checklist item)", "checked": true, "userApproved": false }
+  ]
 }
 ```
 

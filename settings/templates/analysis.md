@@ -71,3 +71,16 @@
 - [ ] Security or performance impact?
 
 > ANY checked → user notification mandatory before proceeding
+
+## 6. Duplication Check (shinpr 5-Criteria)
+
+| Criterion | Score (0-2) | Evidence |
+|-----------|------------|----------|
+| Same input/output signature | | |
+| Same business rule | | |
+| Same data access pattern | | |
+| Same error handling | | |
+| Same UI pattern | | |
+| **Total** | **/10** | |
+
+Decision: Unique (0-3) / Partial Overlap (4-6) / Duplicate (7-10)

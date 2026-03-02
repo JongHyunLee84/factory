@@ -14,12 +14,13 @@ Read these files BEFORE writing any code:
 2. `tasks/analysis.md` — selected approach, file paths
 3. `tasks/requirements.md` — requirement IDs for traceability
 4. `tasks/si-progress.json`
+5. `tasks/ui-design.md` (UI/UX design, if exists) — UI acceptance criteria, layout specs
 
 ## Execution
 
 ### Step 1: Extract Test Plan
 
-Extract all Given/When/Then scenarios from `tasks/design.md` section 9 (Acceptance Criteria).
+Extract all Given/When/Then scenarios from `tasks/design.md` section 8 (Acceptance Criteria).
 Create a test plan mapping:
 
 | AC ID | Requirement | Test Type | Test File | Status |

@@ -54,8 +54,8 @@ Four phases have gates requiring explicit user approval before proceeding:
 - On rejection: Stay in `prd`, incorporate feedback
 
 ### Gate 3: After Architect → Before UI Design
-- Question: "설계 문서를 검토해주세요. 이 설계로 UI 디자인을 진행해도 됩니까?"
-- Apply GO/NO-GO criteria from `${CLAUDE_PLUGIN_ROOT}/settings/rules/design-review.md`
+- Claude auto-checks design against `${CLAUDE_PLUGIN_ROOT}/settings/rules/design-review.md` criteria and presents results
+- Question: "설계 문서를 검토해주세요. 이 설계로 UI 디자인을 진행해도 됩니까?" (사용자가 최종 승인)
 - On GO: Set `phases.architect.gateApproved = true`, advance to `ui-design`
 - On NO-GO: Stay in `architect`, list critical issues
 
@@ -71,7 +71,7 @@ When a phase command completes successfully:
    - Set current phase status to `completed`
    - Record `completedAt` timestamp
    - Record artifact paths
-2. If next phase has `gate: true`, present the gate question
+2. If current phase has `gate: true`, present the gate question
 3. If no gate, automatically advance `currentPhase` to next phase
 4. Display updated status dashboard
 
@@ -82,7 +82,18 @@ After ANY phase transition, automatically write `tasks/si-progress.json`.
 If the user runs a phase command out of order:
 - Warn: "Phase [X]의 선행 조건인 [Y]가 완료되지 않았습니다."
 - Offer: "선행 Phase를 건너뛰겠습니까? (비권장)" or "선행 Phase부터 진행하겠습니까?"
-- If user skips, record `status: "skipped"` for the bypassed phases.
+- If user skips, for each phase between current and target:
+  - Set `phases[phase].status = "skipped"`
+  - Set `phases[phase].completedAt` = current ISO 8601 timestamp
+  - Then advance `currentPhase` to the target phase.
+
+## Phase Failure Recovery
+
+If a phase command fails or produces incomplete results:
+1. Identify the failure point (which step failed and why)
+2. Resolve the root cause
+3. Re-run the same phase command (artifacts will be overwritten)
+4. Previously completed phases are NOT affected — no need to re-run them
 
 ## Progress JSON Schema
 ```json
@@ -97,9 +108,10 @@ If the user runs a phase command out of order:
       "artifacts": ["file paths"],
       "gate": "boolean",
       "gateApproved": "boolean",
-      "completedAt": "ISO 8601 | null"
+      "completedAt": "ISO 8601 | null",
+      "data": {}
     }
   },
-  "notes": "string"
+  "notes": [{"phase": "string", "content": "string", "timestamp": "ISO 8601"}]
 }
 ```

@@ -37,23 +37,27 @@ Use WebSearch/WebFetch to investigate:
 **IMPORTANT**: Write all research to `tasks/research.md` (research buffer).
 `tasks/design.md` contains ONLY decisions, not research notes.
 
+If research is needed:
+1. Create `tasks/research.md` (or append if exists)
+2. Format: `## [Topic]` → findings → sources
+3. Add `tasks/research.md` to `phases.architect.artifacts` if created
+
 ### Step 3: Design Document
 
 Write to `tasks/design.md` using template from `${CLAUDE_PLUGIN_ROOT}/settings/templates/design.md`.
 
-Required sections:
+Required sections (numbering matches template `design.md`):
 1. **Overview** — 2-3 paragraphs + Goals / Non-Goals
-2. **Architecture** — Existing pattern map (Mermaid) showing what exists and what's new/modified
-3. **Technology Stack** — Layer | Choice | Role | Notes table
-4. **System Flows** — Mermaid sequence diagrams for NON-OBVIOUS flows only
-5. **Requirements Traceability** — Every requirement maps to a component and interface
-6. **Components & Interfaces** — Typed signatures for ALL public interfaces
-7. **Data Models** — Schema definitions with migration notes
-8. **Error Handling** — Error scenario | Response | Recovery table
-9. **Acceptance Criteria** — Given/When/Then for EVERY requirement (Step 4)
-10. **Change Impact Map** — Direct, Indirect, No-Effect Zone (Step 5)
-11. **Testing Strategy** — Unit/Integration/E2E scope and tools
-12. **ADR** — If triggered (Step 6)
+2. **Architecture** — Existing pattern map (Mermaid) + Technology Stack table
+3. **System Flows** — Mermaid sequence diagrams for NON-OBVIOUS flows only
+4. **Requirements Traceability** — Every requirement maps to a component and interface
+5. **Components & Interfaces** — Typed signatures for ALL public interfaces
+6. **Data Models** — Schema definitions with migration notes
+7. **Error Handling** — Error scenario | Response | Recovery table
+8. **Acceptance Criteria** — Given/When/Then for EVERY requirement (Step 4)
+9. **Change Impact Map** — Direct, Indirect, No-Effect Zone (Step 5)
+10. **Testing Strategy** — Unit/Integration/E2E scope and tools
+11. **ADR** — If triggered (Step 6)
 
 ### Step 4: Acceptance Criteria (ATDD Pattern)
 
