@@ -10,8 +10,8 @@
     {
       "name": "si",
       "source": "./",
-      "description": "SI 워크플로우 — Research → PRD → Analysis → Architect → TDD → Develop → E2E → Acceptance",
-      "version": "0.1.0"
+      "description": "SI 워크플로우 — Research → PRD → Analysis → Architect → UI Design → TDD → Develop → E2E → Acceptance",
+      "version": "0.2.0"
     }
   ]
 }
