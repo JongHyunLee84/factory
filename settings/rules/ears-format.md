@@ -34,6 +34,16 @@ If [condition], then the [system] shall [action] (to prevent [consequence]).
 ```
 Example: If login attempts exceed 5 in 10 minutes, then the system shall lock the account for 30 minutes (to prevent brute-force attacks).
 
+## Obligation Level Mapping (Korean)
+
+| English | Korean | Level |
+|---------|--------|-------|
+| shall | 해야 한다 | 필수 (mandatory) |
+| should | 하는 것이 좋다 | 권장 (recommended) |
+| may | 할 수 있다 | 선택 (optional) |
+
+한국어로 요구사항 작성 시 위 매핑을 따른다. "~해야 한다" = 필수, "~하는 것이 좋다" = 권장, "~할 수 있다" = 선택.
+
 ## Rules
 
 - Each requirement gets exactly ONE pattern

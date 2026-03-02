@@ -22,6 +22,8 @@ BASE_SHA=$(git rev-parse HEAD~1)  # 또는 origin/main
 HEAD_SHA=$(git rev-parse HEAD)
 git diff --stat ${BASE_SHA}..${HEAD_SHA}
 git diff ${BASE_SHA}..${HEAD_SHA}
+git diff --stat --cached               # staged but not yet committed
+git ls-files --others --exclude-standard  # untracked new files
 ```
 
 리뷰 대상 파악:
@@ -142,7 +144,7 @@ Score: [N]% ([✅ count]/[total])
 # Acceptance Report: [Project Name]
 
 ## Summary
-- **Date**: [ISO 8601]
+- **Date**: [ISO 8601, e.g. 2026-03-02T14:30:00Z]
 - **Compliance Score**: [N]%
 - **Verdict**: PASS / NEEDS IMPROVEMENT / REDESIGN
 

@@ -51,7 +51,9 @@ Deviations: [N]
 
 If NEEDS IMPROVEMENT or REDESIGN:
 - List the top 3 critical deviations
-- Suggest which phase to return to
+- Route to the appropriate phase:
+  - **NEEDS IMPROVEMENT (70-89%)**: → `/si:7-develop` — 구현 갭 수정 후 `/si:8-e2e` 재실행
+  - **REDESIGN (<70%)**: → `/si:4-architect` — 설계 재검토부터 다시 진행
 
 ### Step 4: Update Progress
 

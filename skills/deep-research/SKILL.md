@@ -80,6 +80,11 @@ AI가 URL 하나를 읽고 요약하는 것은 책의 목차만 읽고 내용을
 
 가장 관련성 높은 **10-20개 URL**을 선택.
 
+URL이 20개를 초과하면:
+1. 중복 제거 (같은 내용의 다른 경로)
+2. 우선순위: API Reference > Getting Started > Examples > Blog/Changelog
+3. 범위를 줄여야 하면 사용자에게 이유를 설명하고 결정을 맡긴다.
+
 ---
 
 ## Step 2: Fetch — 병렬 수집 (폴백 체인)
