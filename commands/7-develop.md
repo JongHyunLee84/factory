@@ -1,5 +1,5 @@
 ---
-name: si:7-develop
+name: 7-develop
 description: 구현 가이드 — 에스컬레이션 체크, 중복 판정, 품질 기준 적용
 user-invocable: true
 ---

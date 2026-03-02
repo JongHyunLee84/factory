@@ -1,5 +1,5 @@
 ---
-name: si:4-architect
+name: 4-architect
 description: 기술 설계, ADR, 수용 기준 정의 (cc-sdd + shinpr + ATDD 패턴)
 user-invocable: true
 ---
