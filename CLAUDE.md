@@ -1,12 +1,19 @@
 # SI Workflow Plugin
 
-Claude Code 플러그인 — Research → PRD → Analysis → Architect → UI Design → TDD → Develop → E2E → Acceptance 9단계 소프트웨어 개발 워크플로우.
+멀티 플랫폼 소프트웨어 개발 워크플로우 — Research → PRD → Analysis → Architect → UI Design → TDD → Develop → E2E → Acceptance 9단계.
+
+## 아키텍처
+
+```
+skills/    → Layer 1 (워크플로우 진입점, si-N-*) → Layer 2 (능력 엔진, si-*) 위임
+AGENTS.md  → Codex/Cursor/Copilot 진입점
+```
 
 ---
 
 ## 필수 규칙 — 버전 범프
 
-`commands/`, `skills/`, `hooks/`, `settings/` 내 파일을 변경할 때 **반드시** 아래 두 파일의 `version`을 함께 범프한다.
+`skills/`, `hooks/`, `settings/` 내 파일을 변경할 때 **반드시** 아래 두 파일의 `version`을 함께 범프한다.
 
 | 파일 | 필드 |
 |------|------|
@@ -26,37 +33,39 @@ Claude Code 플러그인 — Research → PRD → Analysis → Architect → UI 
 
 이름이나 경로를 변경할 때 아래 참조를 함께 업데이트해야 한다.
 
-### 커맨드 이름 변경 시
+### 워크플로우 스킬 이름 변경 시
 
-1. `commands/start.md` — Phase Router 테이블 (9개 엔트리)
-2. 각 커맨드의 완료 메시지 (`/si:start` 참조)
-3. `commands/7-develop.md` — `/si:6-tdd`, `/si:4-architect` 참조
-4. `commands/8-e2e.md` — `/si:9-acceptance` 참조
-5. `skills/tdd/SKILL.md` — `/si:8-e2e` 참조
-6. `settings/templates/analysis.md` — attribution 코멘트 (`/si:3-analysis`)
-7. `settings/templates/design.md` — attribution 코멘트 (`/si:4-architect`)
-8. `README.md` — 커맨드 테이블
+1. `skills/si-start/SKILL.md` — Phase Router 테이블 (9개 엔트리)
+2. 각 워크플로우 스킬의 완료 메시지 (si-start 참조)
+3. `skills/si-7-develop/SKILL.md` — si-6-tdd, si-4-architect 참조
+4. `skills/si-8-e2e/SKILL.md` — si-9-acceptance 참조
+5. `skills/si-9-acceptance/SKILL.md` — si-7-develop, si-8-e2e, si-4-architect 참조
+6. `AGENTS.md` — 스킬 테이블
+7. `README.md` — 스킬 테이블
+8. `settings/templates/analysis.md` — attribution 코멘트
+9. `settings/templates/design.md` — attribution 코멘트
 
-### 스킬 이름 변경 시
+### 능력 스킬 이름 변경 시
 
-1. 호출하는 커맨드의 `Skill("si:...")` 호출문
+1. 호출하는 워크플로우 스킬의 "Follow the `si-*` skill" 문구
 2. 스킬 자체 `SKILL.md` frontmatter `name:` 필드
-3. `README.md` — 스킬 테이블
+3. `AGENTS.md` — 능력 스킬 테이블
+4. `README.md` — 능력 스킬 테이블
 
 ### settings/rules 파일 변경 시
 
-1. 참조하는 커맨드: `start.md`(design-review), `2-prd.md`(ears-format), `3-analysis.md`(gap-analysis), `4-architect.md`(design-review)
-2. `skills/prd/SKILL.md` — ears-format 참조
+1. 참조하는 워크플로우 스킬: `si-start`(design-review), `si-3-analysis`(gap-analysis), `si-4-architect`(design-review)
+2. `skills/si-prd/SKILL.md` — ears-format 참조
 
 ### settings/templates 파일 변경 시
 
-1. 참조하는 커맨드: `3-analysis.md`(analysis.md), `4-architect.md`(design.md), `start.md`(si-progress.json)
+1. 참조하는 워크플로우 스킬: `si-3-analysis`(analysis.md), `si-4-architect`(design.md), `si-start`(si-progress.json)
 2. 템플릿 내부 attribution 코멘트
 
 ### tasks/ 아티팩트 경로 변경 시
 
 | 아티팩트 | 영향 범위 |
 |----------|----------|
-| `tasks/si-progress.json` | 모든 커맨드 + session-start hook (가장 영향 큼) |
-| `tasks/design.md` | 6개 커맨드 + 3개 스킬 |
-| `tasks/requirements.md` | 5개 커맨드 + 2개 스킬 |
+| `tasks/si-progress.json` | 모든 워크플로우 스킬 + session-start hook (가장 영향 큼) |
+| `tasks/design.md` | 6개 워크플로우 스킬 + 3개 능력 스킬 |
+| `tasks/requirements.md` | 5개 워크플로우 스킬 + 2개 능력 스킬 |
