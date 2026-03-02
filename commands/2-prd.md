@@ -1,5 +1,5 @@
 ---
-name: 2-prd
+name: si:2-prd
 description: 인터뷰 기반 요구사항 정의서(PRD) 작성
 user-invocable: true
 ---

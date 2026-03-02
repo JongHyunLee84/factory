@@ -1,5 +1,5 @@
 ---
-name: 1-research
+name: si:1-research
 description: 시장/기술 리서치 — Deep research 패턴으로 체계적 조사
 user-invocable: true
 ---

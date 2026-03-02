@@ -1,5 +1,5 @@
 ---
-name: 9-acceptance
+name: si:9-acceptance
 description: 최종 검증 — 준수율 채점 + 체크리스트 (정량 채점 패턴)
 user-invocable: true
 ---

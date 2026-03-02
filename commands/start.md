@@ -1,5 +1,5 @@
 ---
-name: start
+name: si:start
 description: SI 워크플로우 오케스트레이터 — Phase 추적, 게이트 체크, 라우팅
 user-invocable: true
 ---
