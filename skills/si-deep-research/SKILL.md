@@ -50,7 +50,7 @@ In Focused-Topic Mode:
 - **Skip** Step 0.5 (Tool Availability Check) — caller has already checked
 - Execute Steps 1-3 normally, scoped to the given topic and focus questions
 - In **Step 4**, use the **Topic Sub-Report Template** (below) instead of the full SI template
-- Write output to the caller-specified `output_path` (not `tasks/research-report.md`)
+- Write output to the caller-specified `output_path` (not `tasks/si-1-research.md`)
 
 #### Topic Sub-Report Template
 
@@ -184,7 +184,7 @@ WebFetch가 403이나 빈 콘텐츠를 반환하면 페이지 접근 불가가 �
 
 ## Step 4: Synthesize — SI 템플릿으로 종합
 
-URL별이 아닌 **주제별**로 정리한다. `tasks/research-report.md`에 작성:
+URL별이 아닌 **주제별**로 정리한다. `tasks/si-1-research.md`에 작성:
 
 ```markdown
 # Research Report: [Project Name]

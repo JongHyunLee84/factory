@@ -42,8 +42,8 @@ AGENTS.md  → Codex/Cursor/Copilot 진입점
 5. `skills/si-9-acceptance/SKILL.md` — si-7-develop, si-8-e2e, si-4-architect 참조
 6. `AGENTS.md` — 스킬 테이블
 7. `README.md` — 스킬 테이블
-8. `settings/templates/analysis.md` — attribution 코멘트
-9. `settings/templates/design.md` — attribution 코멘트
+8. `settings/templates/si-3-analysis.md` — attribution 코멘트
+9. `settings/templates/si-4-architect.md` — attribution 코멘트
 
 ### 능력 스킬 이름 변경 시
 
@@ -59,7 +59,7 @@ AGENTS.md  → Codex/Cursor/Copilot 진입점
 
 ### settings/templates 파일 변경 시
 
-1. 참조하는 워크플로우 스킬: `si-3-analysis`(analysis.md), `si-4-architect`(design.md), `si-start`(si-progress.json)
+1. 참조하는 워크플로우 스킬: `si-3-analysis`(si-3-analysis.md), `si-4-architect`(si-4-architect.md), `si-start`(si-progress.json)
 2. 템플릿 내부 attribution 코멘트
 
 ### tasks/ 아티팩트 경로 변경 시
@@ -67,7 +67,7 @@ AGENTS.md  → Codex/Cursor/Copilot 진입점
 | 아티팩트 | 영향 범위 |
 |----------|----------|
 | `tasks/si-progress.json` | 모든 워크플로우 스킬 + session-start hook (가장 영향 큼) |
-| `tasks/design.md` | 6개 워크플로우 스킬 + 3개 능력 스킬 |
-| `tasks/requirements.md` | 5개 워크플로우 스킬 + 2개 능력 스킬 |
-| `tasks/<phase>/` | 해당 phase 스킬 + 다운스트림 phase (서브리포트 참조) |
-| `tasks/architect/research.md` | si-4-architect 내부 (기존 `tasks/research.md` 대체) |
+| `tasks/si-4-architect.md` | 6개 워크플로우 스킬 + 3개 능력 스킬 |
+| `tasks/si-2-prd.md` | 5개 워크플로우 스킬 + 2개 능력 스킬 |
+| `tasks/si-N-*/` | 해당 phase 스킬 + 다운스트림 phase (서브리포트 참조) |
+| `tasks/si-4-architect/research.md` | si-4-architect 내부 (기존 `tasks/research.md` 대체) |

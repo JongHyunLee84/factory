@@ -28,16 +28,16 @@ git ls-files --others --exclude-standard  # untracked new files
 
 리뷰 대상 파악:
 
-1. `tasks/requirements.md` — 요구사항 ID
-2. `tasks/design.md` — 수용 기준, 컴포넌트, 인터페이스
-3. `tasks/analysis.md` — 선택한 접근 방식
+1. `tasks/si-2-prd.md` — 요구사항 ID
+2. `tasks/si-4-architect.md` — 수용 기준, 컴포넌트, 인터페이스
+3. `tasks/si-3-analysis.md` — 선택한 접근 방식
 4. 변경된 파일 (`git diff ${BASE_SHA}..${HEAD_SHA}`로 확인)
 
 ---
 
 ## Step 2: Acceptance Criteria Scoring Matrix
 
-`tasks/design.md`의 **모든** 수용 기준에 대해 채점:
+`tasks/si-4-architect.md`의 **모든** 수용 기준에 대해 채점:
 
 | AC ID | Requirement | Test Status | Implementation Status | Verdict |
 |-------|-------------|-------------|----------------------|---------|
@@ -138,7 +138,7 @@ Score: [N]% ([✅ count]/[total])
 
 ## Step 7: Final Report
 
-`tasks/acceptance-report.md`에 작성:
+`tasks/si-9-acceptance.md`에 작성:
 
 ```markdown
 # Acceptance Report: [Project Name]

@@ -104,23 +104,23 @@ si/
 
 **최종 통합 파일:**
 - `tasks/si-progress.json` — Phase 추적
-- `tasks/research-report.md` — 리서치 결과
-- `tasks/requirements.md` — 요구사항 정의서
-- `tasks/analysis.md` — 분석 보고서
-- `tasks/design.md` — 설계 문서
-- `tasks/ui-design.md` — UI 디자인 명세
-- `tasks/acceptance-report.md` — 최종 검증 리포트
+- `tasks/si-1-research.md` — 리서치 결과
+- `tasks/si-2-prd.md` — 요구사항 정의서
+- `tasks/si-3-analysis.md` — 분석 보고서
+- `tasks/si-4-architect.md` — 설계 문서
+- `tasks/si-5-ui-design.md` — UI 디자인 명세
+- `tasks/si-9-acceptance.md` — 최종 검증 리포트
 
 **서브리포트 (중간 산출물):**
-- `tasks/research/` — 토픽별 리서치
-- `tasks/prd/` — 인터뷰 노트, 페르소나 상세
-- `tasks/analysis/` — 옵션별 상세 분석
-- `tasks/architect/` — 기술 리서치 버퍼, ADR 상세
-- `tasks/ui-design/` — 스크린별 상세
-- `tasks/tdd/` — 테스트 계획 상세
-- `tasks/develop/` — 구현 노트
-- `tasks/e2e/` — 시나리오별 테스트 결과
-- `tasks/acceptance/` — 리뷰 상세
+- `tasks/si-1-research/` — 토픽별 리서치
+- `tasks/si-2-prd/` — 인터뷰 노트, 페르소나 상세
+- `tasks/si-3-analysis/` — 옵션별 상세 분석
+- `tasks/si-4-architect/` — 기술 리서치 버퍼, ADR 상세
+- `tasks/si-5-ui-design/` — 스크린별 상세
+- `tasks/si-6-tdd/` — 테스트 계획 상세
+- `tasks/si-7-develop/` — 구현 노트
+- `tasks/si-8-e2e/` — 시나리오별 테스트 결과
+- `tasks/si-9-acceptance/` — 리뷰 상세
 
 서브디렉토리는 필요할 때만 생성됩니다.
 

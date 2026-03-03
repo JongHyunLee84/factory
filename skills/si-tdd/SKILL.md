@@ -47,7 +47,7 @@ NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 
 ## Step 1: Test Plan from Acceptance Criteria
 
-`tasks/design.md`의 수용 기준(Given/When/Then)에서 테스트 플랜을 추출한다.
+`tasks/si-4-architect.md`의 수용 기준(Given/When/Then)에서 테스트 플랜을 추출한다.
 
 | AC ID | Requirement | Test Type | Test File | Status |
 |-------|-------------|-----------|-----------|--------|
@@ -155,7 +155,7 @@ AC-003: ⏳ Pending
 ## Step 4: Edge Cases & Error Paths
 
 모든 수용 기준에 통과하는 테스트가 있은 후:
-1. `tasks/design.md`의 Error Handling 섹션 검토
+1. `tasks/si-4-architect.md`의 Error Handling 섹션 검토
 2. 각 에러 시나리오에 대한 테스트 작성
 3. R-G-R로 에러 처리 구현
 

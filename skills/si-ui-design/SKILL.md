@@ -16,7 +16,7 @@ compatibility:
 
 # SI UI Design
 
-SI 워크플로우의 UI Design Phase를 위한 스킬. 기술 설계(tasks/design.md)를 기반으로 실현 가능한 UI를 설계하고, TDD 진입 전 "무엇을 만들지"를 시각적으로 합의한다.
+SI 워크플로우의 UI Design Phase를 위한 스킬. 기술 설계(tasks/si-4-architect.md)를 기반으로 실현 가능한 UI를 설계하고, TDD 진입 전 "무엇을 만들지"를 시각적으로 합의한다.
 
 ## Reference Files
 
@@ -49,20 +49,20 @@ SI 워크플로우의 UI Design Phase를 위한 스킬. 기술 설계(tasks/desi
 2. **일관성**: 같은 패턴에 같은 컴포넌트. 디자인 토큰으로 통일.
 3. **접근성**: 키보드 네비게이션, 포커스 관리, 충분한 대비, 의미 있는 빈/에러 상태.
 4. **최소 놀라움**: 사용자가 예상하는 위치에 예상하는 동작. 화려한 효과보다 명확한 인터랙션.
-5. **기술 실현 가능성**: `tasks/design.md`의 컴포넌트 구조와 API 경계 안에서 설계.
+5. **기술 실현 가능성**: `tasks/si-4-architect.md`의 컴포넌트 구조와 API 경계 안에서 설계.
 
 ---
 
 ## Step 0: Context Gathering
 
 ### 기술 설계에서 추출할 정보:
-- `tasks/design.md` §2 Architecture — 컴포넌트 구조, 레이어
-- `tasks/design.md` §4 System Flows — 사용자 흐름 (Mermaid)
-- `tasks/design.md` §6 Components & Interfaces — 공개 인터페이스
-- `tasks/design.md` §7 Data Models — 화면에 표시될 데이터
+- `tasks/si-4-architect.md` §2 Architecture — 컴포넌트 구조, 레이어
+- `tasks/si-4-architect.md` §4 System Flows — 사용자 흐름 (Mermaid)
+- `tasks/si-4-architect.md` §6 Components & Interfaces — 공개 인터페이스
+- `tasks/si-4-architect.md` §7 Data Models — 화면에 표시될 데이터
 
 ### 요구사항에서 추출할 정보:
-- `tasks/requirements.md` — 기능 요구사항별 사용자 스토리
+- `tasks/si-2-prd.md` — 기능 요구사항별 사용자 스토리
 - 비기능 요구사항 중 UI 관련 (반응형, 성능, 접근성)
 
 ### 기존 코드에서 추출할 정보 (Extension/Simple Addition일 때):
@@ -145,7 +145,7 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 
 ## Step 4: Design-to-Spec Conversion
 
-디자인 결과물을 `tasks/ui-design.md`로 변환:
+디자인 결과물을 `tasks/si-5-ui-design.md`로 변환:
 
 ### Pencil MCP 도구로 추출 (Pencil 사용 시):
 - `batch_get` → 디자인 요소 데이터 → Screen Inventory
@@ -159,7 +159,7 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 - 라우팅/네비게이션 → Screen Flows
 - 이벤트 핸들러 → Interaction Specifications
 
-### 출력: `tasks/ui-design.md` 템플릿
+### 출력: `tasks/si-5-ui-design.md` 템플릿
 
 ```markdown
 # UI Design Specification
@@ -211,13 +211,13 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 ## 9. Design-to-Code Mapping
 | UI Component | Technical Component | Props/Interface | Source |
 |-------------|-------------------|-----------------|--------|
-| | | | design.md §6 |
+| | | | si-4-architect.md §6 |
 ```
 
 ### 필수 검증:
 1. **Coverage**: 모든 기능 요구사항이 최소 하나의 화면에 매핑됨
 2. **Consistency**: 같은 패턴에 같은 컴포넌트 사용
-3. **Feasibility**: 모든 UI 컴포넌트가 `tasks/design.md`의 기술 컴포넌트에 매핑됨
+3. **Feasibility**: 모든 UI 컴포넌트가 `tasks/si-4-architect.md`의 기술 컴포넌트에 매핑됨
 4. **Accessibility**: 키보드, 대비, 포커스 계획 존재
 
 ---
@@ -228,7 +228,7 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 
 1. 프로토타입/코드 변환 결과를 브라우저에서 렌더링
 2. 스크린샷 캡처
-3. `tasks/design.md`의 인터페이스와 교차 검증
+3. `tasks/si-4-architect.md`의 인터페이스와 교차 검증
 4. 접근성 기본 확인 (대비, 포커스 순서)
 
 ---
@@ -237,7 +237,7 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 
 이 행동을 하고 있으면 멈추고 수정:
 
-- **기술 설계 무시**: `tasks/design.md`의 컴포넌트 구조와 맞지 않는 UI 설계
+- **기술 설계 무시**: `tasks/si-4-architect.md`의 컴포넌트 구조와 맞지 않는 UI 설계
 - **과잉 디자인**: 핵심 화면 대신 모든 가능한 화면을 상세 설계
 - **토큰 미정의**: 색상/간격/타이포를 하드코딩하고 토큰화하지 않음
 - **접근성 후순위**: "나중에 접근성" → 처음부터 기본은 포함
