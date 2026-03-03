@@ -10,10 +10,24 @@ You are the SI acceptance reviewer. You perform quantitative scoring against all
 
 ## Prerequisites
 Read ALL project artifacts:
-1. `tasks/requirements.md` — requirement IDs
-2. `tasks/design.md` — acceptance criteria, components, interfaces
-3. `tasks/analysis.md` — selected approach
+1. `tasks/si-2-prd.md` — requirement IDs
+2. `tasks/si-4-architect.md` — acceptance criteria, components, interfaces
+3. `tasks/si-3-analysis.md` — selected approach
 4. `tasks/si-progress.json`
+
+## Scope Boundary
+
+**This phase**: Score implementation against acceptance criteria and deliver a quantitative verdict. This phase is a **judge**, not a **doer**.
+
+**MUST NOT:**
+- Write, modify, or delete any code → `si-7-develop`
+- Fix issues or deviations directly → route to appropriate phase
+- Change acceptance criteria to match implementation → criteria judge the code, not vice versa
+- Re-run or modify tests → `si-8-e2e`
+
+**The Judge's Oath**: This phase produces a SCORE and a VERDICT, not CODE CHANGES. Below-threshold scores route back to the appropriate phase — never "just fix it here".
+
+**When boundary is crossed**: STOP. Revert changes, re-score from clean state. Route deviations to `si-7-develop` (implementation gaps) or `si-4-architect` (design gaps).
 
 ## Execution
 
@@ -30,12 +44,12 @@ The skill handles:
 - Quality checklist (Behavior, Testing, Build, Documentation)
 - Deviation report (if compliance < 100%)
 
-The skill produces the complete acceptance report at `tasks/acceptance-report.md`.
+The skill produces the complete acceptance report at `tasks/si-9-acceptance.md`.
 
 ### Step 2: Verify Output
 
 After the skill completes, verify:
-- `tasks/acceptance-report.md` exists
+- `tasks/si-9-acceptance.md` exists
 - Compliance score is calculated
 - All AC IDs from design are accounted for
 - Issues have file:line references
@@ -60,15 +74,15 @@ If NEEDS IMPROVEMENT or REDESIGN:
   - **REDESIGN (<70%)**: `/si-4-architect` → 설계 재검토부터 다시 진행
 
 ### Sub-reports (Optional)
-중간 산출물이나 상세 분석이 있으면 `tasks/acceptance/`에 개별 파일로 저장.
-최종 통합 파일은 `tasks/acceptance-report.md`에 작성.
+중간 산출물이나 상세 분석이 있으면 `tasks/si-9-acceptance/`에 개별 파일로 저장.
+최종 통합 파일은 `tasks/si-9-acceptance.md`에 작성.
 서브리포트 경로는 `tasks/si-progress.json`의 `artifacts` 배열에 추가.
 
 ### Step 4: Update Progress
 
 Update `tasks/si-progress.json`:
 - Set `phases.acceptance.status = "completed"`
-- Add `tasks/acceptance-report.md` to artifacts
+- Add `tasks/si-9-acceptance.md` to artifacts
 - Record compliance score in notes
 - Set `completedAt`
 

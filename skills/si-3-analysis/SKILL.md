@@ -15,11 +15,25 @@ NEVER use these words in analysis output:
 - ~~consider~~ → use "must" / "must-not" / "conditional-on [trigger]"
 - ~~might~~ / ~~could~~ / ~~should consider~~ → state the fact or mark "unknown"
 
+## Scope Boundary
+
+**This phase**: Analyze the current codebase, identify gaps, and present implementation options with tradeoffs.
+
+**MUST NOT:**
+- Make final architecture decisions — present options A/B/C with evidence, `si-4-architect` decides
+- Design interfaces or type signatures → `si-4-architect`
+- Write any code or create code files → `si-7-develop`
+- Define acceptance criteria (Given/When/Then) → `si-4-architect`
+
+**Output test**: The analysis must present **options with scored tradeoffs**, not **conclusions**. "We will use X" is a violation → "Option A (X): Effort M, Risk L, Maintainability H".
+
+**When boundary is crossed**: Reframe conclusions as options in the 3-option comparison table. Let `si-4-architect` make the final call.
+
 ## Prerequisites
 Read these files BEFORE any analysis (Read-first principle):
-1. `tasks/requirements.md` (from PRD phase)
-2. `tasks/research-report.md` (from Research phase, if exists)
-3. `tasks/research/` (topic sub-reports, if exist)
+1. `tasks/si-2-prd.md` (from PRD phase)
+2. `tasks/si-1-research.md` (from Research phase, if exists)
+3. `tasks/si-1-research/` (topic sub-reports, if exist)
 4. `tasks/si-progress.json`
 
 ## Execution Flow
@@ -57,7 +71,7 @@ Record the classification with file path evidence.
 
 ### Step 3: Requirements Feasibility
 
-For EACH requirement from `tasks/requirements.md`:
+For EACH requirement from `tasks/si-2-prd.md`:
 
 | Req ID | Technical Need | Category | Gap Tag | Notes |
 |--------|---------------|----------|---------|-------|
@@ -114,11 +128,11 @@ For each new component, score against existing code:
 
 ## Output
 
-Write to `tasks/analysis.md` using template from `settings/templates/analysis.md`.
+Write to `tasks/si-3-analysis.md` using template from `settings/templates/si-3-analysis.md`.
 
 ### Sub-reports (Optional)
-중간 산출물이나 상세 분석이 있으면 `tasks/analysis/`에 개별 파일로 저장.
-최종 통합 파일은 `tasks/analysis.md`에 작성.
+중간 산출물이나 상세 분석이 있으면 `tasks/si-3-analysis/`에 개별 파일로 저장.
+최종 통합 파일은 `tasks/si-3-analysis.md`에 작성.
 서브리포트 경로는 `tasks/si-progress.json`의 `artifacts` 배열에 추가.
 
 Also update `tasks/si-progress.json` `phases.analysis.data` with:
@@ -138,7 +152,7 @@ Also update `tasks/si-progress.json` `phases.analysis.data` with:
 
 Update `tasks/si-progress.json`:
 - Set `phases.analysis.status = "completed"`
-- Add `tasks/analysis.md` to artifacts
+- Add `tasks/si-3-analysis.md` to artifacts
 - Set `completedAt`
 
 Inform:

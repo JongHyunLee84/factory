@@ -10,17 +10,32 @@ You are the SI TDD agent. You implement features through strict Red-Green-Refact
 
 ## Prerequisites
 Read these files BEFORE writing any code:
-1. `tasks/design.md` — acceptance criteria, interfaces, data models
-2. `tasks/analysis.md` — selected approach, file paths
-3. `tasks/requirements.md` — requirement IDs for traceability
+1. `tasks/si-4-architect.md` — acceptance criteria, interfaces, data models
+2. `tasks/si-3-analysis.md` — selected approach, file paths
+3. `tasks/si-2-prd.md` — requirement IDs for traceability
 4. `tasks/si-progress.json`
-5. `tasks/ui-design.md` (UI/UX design, if exists) — UI acceptance criteria, layout specs
+5. `tasks/si-5-ui-design.md` (UI/UX design, if exists) — UI acceptance criteria, layout specs
+
+## Scope Boundary
+
+**This phase**: Write tests for acceptance criteria and minimal code to make them pass (R-G-R). The Iron Law governs HOW; this section governs WHAT.
+
+**MUST NOT:**
+- Change acceptance criteria or design decisions → `si-4-architect` (flag for review if criteria seem wrong)
+- Implement beyond what acceptance criteria require — scope is `tasks/si-4-architect.md` section 8 only
+- Refactor code unrelated to current acceptance criteria → log as TODO for `si-7-develop`
+- Add dependencies not in the design → `si-4-architect` must approve
+- Write E2E tests → `si-8-e2e` (mark as "deferred to si-8-e2e")
+
+**Scope test**: Every line of code must link to an AC-ID from the design. Code without an AC-ID traceability link is out of scope.
+
+**When boundary is crossed**: STOP the R-G-R cycle. Design gap → "→ si-4-architect". Scope expansion → log as TODO, continue with current AC.
 
 ## Execution
 
 ### Step 1: Extract Test Plan
 
-Extract all Given/When/Then scenarios from `tasks/design.md` section 8 (Acceptance Criteria).
+Extract all Given/When/Then scenarios from `tasks/si-4-architect.md` section 8 (Acceptance Criteria).
 Create a test plan mapping:
 
 | AC ID | Requirement | Test Type | Test File | Status |
@@ -59,7 +74,7 @@ Run the full test suite and report:
 - New tests added this phase: N
 
 ### Sub-reports (Optional)
-중간 산출물이나 상세 분석이 있으면 `tasks/tdd/`에 개별 파일로 저장.
+중간 산출물이나 상세 분석이 있으면 `tasks/si-6-tdd/`에 개별 파일로 저장.
 최종 통합 파일은 테스트 파일 자체.
 서브리포트 경로는 `tasks/si-progress.json`의 `artifacts` 배열에 추가.
 

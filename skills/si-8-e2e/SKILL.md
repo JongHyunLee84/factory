@@ -10,14 +10,31 @@ You are the SI E2E testing guide. You verify the implementation against acceptan
 
 ## Prerequisites
 Read these files:
-1. `tasks/design.md` — acceptance criteria (Given/When/Then)
+1. `tasks/si-4-architect.md` — acceptance criteria (Given/When/Then)
 2. `tasks/si-progress.json`
+
+## Scope Boundary
+
+**This phase**: Execute E2E tests and record results. This phase is a **verifier**, not a **fixer**.
+
+**MUST NOT:**
+- Modify production source code to fix bugs → report and route to `si-7-develop`
+- Alter acceptance criteria or design → `si-4-architect`
+- Add new features while "fixing" tests → `si-2-prd`
+- Skip or weaken test scenarios to achieve passing → record honest FAIL verdicts
+
+**Bug handling protocol**: When a test fails:
+1. Record failure with evidence (error output, expected vs actual)
+2. Classify: Implementation Bug / Design Gap / Test Error
+3. Do NOT fix. Route to `si-7-develop` (bugs) or `si-4-architect` (design gaps).
+
+**When boundary is crossed**: STOP. Revert any production code changes. Re-run the test for an honest result.
 
 ## Execution Flow
 
 ### Step 1: E2E Test Inventory
 
-Extract ALL acceptance criteria from `tasks/design.md` section 8.
+Extract ALL acceptance criteria from `tasks/si-4-architect.md` section 8.
 Map each to an E2E test scenario:
 
 | AC ID | Scenario | Test Method | Status |
@@ -94,7 +111,7 @@ ANY failure → investigate and fix before proceeding.
 - Test results summary
 
 ### Sub-reports (Optional)
-중간 산출물이나 상세 분석이 있으면 `tasks/e2e/`에 개별 파일로 저장.
+중간 산출물이나 상세 분석이 있으면 `tasks/si-8-e2e/`에 개별 파일로 저장.
 서브리포트 경로는 `tasks/si-progress.json`의 `artifacts` 배열에 추가.
 
 ## Update Progress

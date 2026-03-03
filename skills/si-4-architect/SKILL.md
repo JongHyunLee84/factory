@@ -10,10 +10,25 @@ You are the SI architect agent. You produce a technical design document that ser
 
 ## Prerequisites
 Read these files BEFORE any design work (Read-first principle):
-1. `tasks/requirements.md` (PRD)
-2. `tasks/analysis.md` (Analysis)
-3. `tasks/research-report.md` (Research, if exists)
+1. `tasks/si-2-prd.md` (PRD)
+2. `tasks/si-3-analysis.md` (Analysis)
+3. `tasks/si-1-research.md` (Research, if exists)
 4. `tasks/si-progress.json`
+
+## Scope Boundary
+
+**This phase**: Produce a technical design document — interfaces, data models, acceptance criteria. The design is a **blueprint**, not a **build**.
+
+**MUST NOT:**
+- Write production code or test code in any source file → `si-6-tdd`, `si-7-develop`
+- Create, modify, or delete files outside `tasks/` → `si-7-develop` owns the codebase
+- Scaffold project structure (mkdir, init, install dependencies) → `si-7-develop`
+- Design detailed UI layouts or visual hierarchy → `si-5-ui-design`
+- Run build/test/lint commands against project code → `si-6-tdd`, `si-7-develop`
+
+**The Architect's Pen Test**: After completing the design, verify: were ANY files created or modified outside `tasks/`? If yes, it is a boundary violation. The architect's only outputs are documents in `tasks/`.
+
+**When boundary is crossed**: STOP. Delete any non-document artifacts. If the urge to code arose from an unclear interface, improve the design document — do not touch the source tree.
 
 ## Execution Flow
 
@@ -34,19 +49,19 @@ Use WebSearch/WebFetch to investigate:
 - External dependency API signatures, rate limits, version compatibility
 - Similar implementations in established projects
 
-**IMPORTANT**: Write all research to `tasks/architect/research.md` (research buffer).
-`tasks/design.md` contains ONLY decisions, not research notes.
+**IMPORTANT**: Write all research to `tasks/si-4-architect/research.md` (research buffer).
+`tasks/si-4-architect.md` contains ONLY decisions, not research notes.
 
 If research is needed:
-1. Create `tasks/architect/research.md` (or append if exists)
+1. Create `tasks/si-4-architect/research.md` (or append if exists)
 2. Format: `## [Topic]` → findings → sources
-3. Add `tasks/architect/research.md` to `phases.architect.artifacts` if created
+3. Add `tasks/si-4-architect/research.md` to `phases.architect.artifacts` if created
 
 ### Step 3: Design Document
 
-Write to `tasks/design.md` using template from `settings/templates/design.md`.
+Write to `tasks/si-4-architect.md` using template from `settings/templates/si-4-architect.md`.
 
-Required sections (numbering matches template `design.md`):
+Required sections (numbering matches template `si-4-architect.md`):
 1. **Overview** — 2-3 paragraphs + Goals / Non-Goals
 2. **Architecture** — Existing pattern map (Mermaid) + Technology Stack table
 3. **System Flows** — Mermaid sequence diagrams for NON-OBVIOUS flows only
@@ -133,20 +148,20 @@ If any check fails, fix it before presenting.
 
 ## Output
 
-- `tasks/design.md` — design document (decisions only)
-- `tasks/architect/research.md` — research buffer (investigation notes)
-- ADR in design.md section 11 (if triggered)
+- `tasks/si-4-architect.md` — design document (decisions only)
+- `tasks/si-4-architect/research.md` — research buffer (investigation notes)
+- ADR in si-4-architect.md section 11 (if triggered)
 
 ### Sub-reports (Optional)
-중간 산출물이나 상세 분석이 있으면 `tasks/architect/`에 개별 파일로 저장.
-최종 통합 파일은 `tasks/design.md`에 작성.
+중간 산출물이나 상세 분석이 있으면 `tasks/si-4-architect/`에 개별 파일로 저장.
+최종 통합 파일은 `tasks/si-4-architect.md`에 작성.
 서브리포트 경로는 `tasks/si-progress.json`의 `artifacts` 배열에 추가.
 
 ## Update Progress
 
 Update `tasks/si-progress.json`:
 - Set `phases.architect.status = "completed"`
-- Add `tasks/design.md` (and `tasks/architect/research.md` if created) to artifacts
+- Add `tasks/si-4-architect.md` (and `tasks/si-4-architect/research.md` if created) to artifacts
 - Set `completedAt`
 
 Inform:

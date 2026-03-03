@@ -12,6 +12,20 @@ You are conducting structured research for the SI workflow. You decompose the re
 - User's project idea or problem statement
 - Any URLs, references, or constraints provided
 
+## Scope Boundary
+
+**This phase**: Gather information and organize findings as facts — not decisions.
+
+**MUST NOT:**
+- Define requirements or user stories → `si-2-prd`
+- Recommend a specific technical stack or architecture → `si-4-architect`
+- Propose solution designs or component structures → `si-4-architect`
+- Write any code → `si-7-develop`
+
+**Output test**: Every sentence must be a **fact or observation**, not a **prescription**. "We should use X" is a violation → rephrase as "[Option X] offers [tradeoff Y] (source: Z)".
+
+**When boundary is crossed**: Move prescriptive content to `Open Questions` at the end of the report, tagged for the downstream phase (e.g., "→ si-4-architect: evaluate whether X fits").
+
 ## Execution
 
 ### Step 1: Research Interview
@@ -115,7 +129,7 @@ Each Agent receives:
 - `mode`: `"bypassPermissions"`
 - Topic title, description, and focus questions
 - Project context (project name, problem statement, user-provided URLs)
-- Output path: `tasks/research/topic-N-[slug].md`
+- Output path: `tasks/si-1-research/topic-N-[slug].md`
 - Instruction to read `skills/si-deep-research/SKILL.md` and follow **Focused-Topic Mode**
 
 **Agent prompt template:**
@@ -151,13 +165,13 @@ Do NOT ask the user questions — work autonomously with the information provide
 
 After all agents complete:
 
-1. Verify each sub-report file exists at `tasks/research/topic-N-[slug].md`
+1. Verify each sub-report file exists at `tasks/si-1-research/topic-N-[slug].md`
 2. Check each sub-report has the required sections (Focus Questions, Key Findings, Gaps & Unknowns, Sources)
 3. If any sub-report is missing or incomplete, note which topics need attention
 
 ### Step 6: Synthesize
 
-Read ALL sub-reports and synthesize into `tasks/research-report.md`.
+Read ALL sub-reports and synthesize into `tasks/si-1-research.md`.
 
 This is **integration, not concatenation**:
 - Cross-reference findings across topics
@@ -180,14 +194,14 @@ Use the SI research template from `si-deep-research/SKILL.md` Step 4:
 
 Each section draws from multiple sub-reports. Add a "Synthesized from" note:
 ```markdown
-> Synthesized from [N] topic reports in `tasks/research/`
+> Synthesized from [N] topic reports in `tasks/si-1-research/`
 ```
 
 ### Step 7: Update Progress
 
 Update `tasks/si-progress.json`:
 - Set `phases.research.status = "completed"`
-- Add `tasks/research-report.md` to `artifacts`
+- Add `tasks/si-1-research.md` to `artifacts`
 - Add each sub-report path to `artifacts`
 - Set `completedAt` to current timestamp
 - Set `phases.research.data`:
@@ -195,9 +209,9 @@ Update `tasks/si-progress.json`:
 ```json
 {
   "topics": [
-    { "id": "topic-1", "title": "[title]", "status": "completed", "subReport": "tasks/research/topic-1-[slug].md" }
+    { "id": "topic-1", "title": "[title]", "status": "completed", "subReport": "tasks/si-1-research/topic-1-[slug].md" }
   ],
-  "synthesizedFrom": "tasks/research/"
+  "synthesizedFrom": "tasks/si-1-research/"
 }
 ```
 
@@ -206,5 +220,5 @@ Then inform the user:
 
 ## Output
 
-- `tasks/research-report.md` — final synthesized report
-- `tasks/research/topic-N-*.md` — individual topic sub-reports
+- `tasks/si-1-research.md` — final synthesized report
+- `tasks/si-1-research/topic-N-*.md` — individual topic sub-reports

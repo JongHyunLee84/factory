@@ -9,8 +9,23 @@ description: 인터뷰 기반 요구사항 정의서(PRD) 작성
 You are creating a Product Requirements Document through structured interview for the SI workflow.
 
 ## Prerequisites
-- Read `tasks/research-report.md` if it exists (from Research phase)
+- Read `tasks/si-1-research.md` if it exists (from Research phase)
 - Read `tasks/si-progress.json` for project context
+
+## Scope Boundary
+
+**This phase**: Define WHAT to build and WHY — requirements, user stories, success metrics.
+
+**MUST NOT:**
+- Specify technology stack, frameworks, or libraries → `si-4-architect`
+- Design component structures, APIs, or data models → `si-4-architect`
+- Define UI layout, screen flows, or visual design → `si-5-ui-design`
+- Describe HOW to implement any requirement — requirements define behavior only
+- Write acceptance criteria in Given/When/Then → `si-4-architect` (PRD uses EARS only)
+
+**Output test**: Every requirement must answer "What must the system do?" without answering "How should it be built?" If a requirement mentions a class name, API endpoint, or UI component, it is a boundary violation.
+
+**When boundary is crossed**: Extract technical content into Open Questions (section 9) tagged "→ si-4-architect" or "→ si-5-ui-design". Rewrite in pure EARS behavioral language.
 
 ## Execution
 
@@ -35,7 +50,7 @@ Including:
 ### Step 2: Verify Output
 
 After the skill completes, verify:
-- `tasks/requirements.md` exists
+- `tasks/si-2-prd.md` exists
 - All requirements use EARS patterns (no free-form text)
 - Value Hypothesis is present and falsifiable
 - Non-Goals section exists and is non-empty
@@ -53,15 +68,15 @@ Present the requirements summary to the user:
 Iterate until the user approves.
 
 ### Sub-reports (Optional)
-중간 산출물이나 상세 분석이 있으면 `tasks/prd/`에 개별 파일로 저장.
-최종 통합 파일은 `tasks/requirements.md`에 작성.
+중간 산출물이나 상세 분석이 있으면 `tasks/si-2-prd/`에 개별 파일로 저장.
+최종 통합 파일은 `tasks/si-2-prd.md`에 작성.
 서브리포트 경로는 `tasks/si-progress.json`의 `artifacts` 배열에 추가.
 
 ### Step 4: Update Progress
 
 Update `tasks/si-progress.json`:
 - Set `phases.prd.status = "completed"`
-- Add `tasks/requirements.md` to artifacts
+- Add `tasks/si-2-prd.md` to artifacts
 - Set `completedAt` to current timestamp
 
 Inform:
