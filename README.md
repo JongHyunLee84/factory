@@ -12,7 +12,7 @@
 
 ```bash
 # 마켓플레이스 추가 (최초 1회)
-/plugin marketplace add JongHyunLee84/si
+/plugin marketplace add JongHyunLee84/factory
 
 # 설치
 /plugin install factory@factory
@@ -23,7 +23,7 @@
 프로젝트 루트에 이 저장소를 클론하거나 서브모듈로 추가:
 
 ```bash
-git clone https://github.com/JongHyunLee84/si.git
+git clone https://github.com/JongHyunLee84/factory.git
 ```
 
 `AGENTS.md`와 `skills/` 디렉토리가 에이전트에 자동 인식됩니다.
