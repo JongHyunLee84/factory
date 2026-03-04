@@ -75,7 +75,61 @@ Read these files BEFORE any design work (Read-first principle).
 
 ---
 
-## Step 0: Context Gathering
+## Step 0: Decision Agenda
+
+> 공유 프로토콜: `settings/templates/decision-agenda.md`
+
+### 0-1. Read Prior Decisions
+이전 스킬의 decisions 파일을 읽는다 (있으면):
+- `factory/prd/decisions.md`
+- `factory/analysis/decisions.md`
+- `factory/architect/decisions.md`
+
+이미 결정된 항목은 "Pre-decided"로 표시하고 skip.
+
+### 0-2. Generate Agenda
+입력과 컨텍스트를 분석하여 아래 결정 항목을 기본 Agenda로 구성.
+
+**Tier 1 (Strategic — 사용자 필수):**
+
+| ID | Decision | 비위임 |
+|----|----------|--------|
+| UI-D-001 | **디자인 방향** — 카드 기반 vs 폼 중심 vs 대시보드 등 전체적인 UI 접근법 | Yes |
+| UI-D-002 | **화면 목록 검토/승인** — AI가 요구사항에서 추출한 전체 화면 목록을 사용자가 검토, 추가/제거/우선순위 조정 | Yes |
+| UI-D-003 | 디자인 시스템/컴포넌트 라이브러리 선택 | No |
+
+**Tier 2 (Tactical — AI 기본값 + 사용자 오버라이드):**
+
+| ID | Decision | AI 기본값 |
+|----|----------|----------|
+| UI-D-004 | 반응형 브레이크포인트 | 모바일 390px, 태블릿 768px, 데스크톱 1440px |
+| UI-D-005 | 접근성 수준 (WCAG A/AA/AAA) | WCAG AA |
+| UI-D-006 | 컬러/타이포 토큰 | 기존 프로젝트 토큰 또는 디자인 시스템 기본값 |
+| UI-D-007 | UI↔기술 컴포넌트 매핑 방식 | architect.md §5 기반 1:1 매핑 |
+
+### 0-3. Agenda Overview
+`AskUserQuestion`으로 진행 방식 확인:
+- **핵심만 검토 (Recommended)**: Tier 1만 직접, Tier 2는 AI 기본값
+- **전체 검토**: Tier 1 + Tier 2 모든 결정을 직접
+- **알아서 해줘**: AI가 결정하고 근거 기록. UI-D-001(디자인 방향), UI-D-002(화면 목록 승인)만 반드시 확인
+
+### 0-4. Decision Walk-through
+선택에 따라 `AskUserQuestion`으로 결정 수집 (최대 4개/배치, 의존성 순서 준수).
+- UI-D-001은 Context Gathering 후 후보 방향을 제시하며 질문한다.
+- UI-D-002는 Screen Identification 결과와 함께 질문한다.
+
+### 0-5. Record Decisions
+`factory/ui-design/decisions.md`에 기록:
+
+| ID | Decision | Choice | Rationale | Decided By | Date |
+|----|----------|--------|-----------|------------|------|
+
+### 0-6. Proceed
+모든 선행 결정 기록 후 Step 1로 진행. UI-D-001, UI-D-002는 해당 Step에서 결정.
+
+---
+
+## Step 1: Context Gathering
 
 ### 기술 설계에서 추출할 정보:
 - `factory/architect/architect.md` §2 Architecture — 컴포넌트 구조, 레이어
@@ -94,7 +148,7 @@ Read these files BEFORE any design work (Read-first principle).
 
 ---
 
-## Step 1: Screen Identification
+## Step 2: Screen Identification
 
 System Flows와 기능 요구사항에서 화면 목록 추출:
 
@@ -108,7 +162,7 @@ System Flows와 기능 요구사항에서 화면 목록 추출:
 
 ---
 
-## Step 2: Tool Selection
+## Step 3: Tool Selection
 
 리서치 시작 시 `ToolSearch`로 가용 도구를 확인:
 
@@ -125,7 +179,7 @@ ToolSearch: "pencil"
 
 ---
 
-## Step 3: Design Execution
+## Step 4: Design Execution
 
 ### Pencil MCP Path
 
@@ -165,7 +219,7 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 
 ---
 
-## Step 4: Design-to-Spec Conversion
+## Step 5: Design-to-Spec Conversion
 
 디자인 결과물을 `factory/ui-design/ui-design.md`로 변환:
 
@@ -244,7 +298,7 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 
 ---
 
-## Step 5: Visual Verification
+## Step 6: Visual Verification
 
 `claude-in-chrome`으로 최종 검증:
 
@@ -280,4 +334,4 @@ Pencil이 없을 때 Claude Code가 직접 프로토타입 생성:
 
 ## Completion
 
-UI 디자인이 완료되었습니다. 결과는 `factory/ui-design/ui-design.md`에 저장되었습니다.
+UI 디자인이 완료되었습니다. 결과는 `factory/ui-design/ui-design.md`와 `factory/ui-design/decisions.md`에 저장되었습니다.

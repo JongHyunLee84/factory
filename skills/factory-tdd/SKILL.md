@@ -69,6 +69,59 @@ NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 
 ---
 
+## Step 0: Decision Agenda
+
+> 공유 프로토콜: `settings/templates/decision-agenda.md`
+
+### 0-1. Read Prior Decisions
+이전 스킬의 decisions 파일을 읽는다 (있으면):
+- `factory/prd/decisions.md`
+- `factory/analysis/decisions.md`
+- `factory/architect/decisions.md`
+- `factory/ui-design/decisions.md`
+
+이미 결정된 항목은 "Pre-decided"로 표시하고 skip.
+
+### 0-2. Generate Agenda
+입력과 컨텍스트를 분석하여 아래 결정 항목을 기본 Agenda로 구성.
+
+**Tier 1 (Strategic — 사용자 필수):**
+
+| ID | Decision | 비위임 |
+|----|----------|--------|
+| T-D-001 | **테스트 플랜 검토/승인** — AC→테스트 매핑을 사용자가 확인 | No |
+| T-D-002 | **TDD 예외 승인** — 프로토타입 등 TDD 건너뛰기가 정당한 경우 | Yes |
+
+**Tier 2 (Tactical — AI 기본값 + 사용자 오버라이드):**
+
+| ID | Decision | AI 기본값 |
+|----|----------|----------|
+| T-D-003 | 엣지 케이스 선택 범위 | architect.md Error Handling 섹션 기반 |
+| T-D-004 | AC별 테스트 유형 (unit/integration/e2e) | Step 1의 Test Type Selection 기준 |
+| T-D-005 | Mock 경계 결정 | 외부 의존성만 mock (Gate Function 적용) |
+
+### 0-3. Agenda Overview
+`AskUserQuestion`으로 진행 방식 확인:
+- **핵심만 검토 (Recommended)**: Tier 1만 직접, Tier 2는 AI 기본값
+- **전체 검토**: Tier 1 + Tier 2 모든 결정을 직접
+- **알아서 해줘**: AI가 결정하고 근거 기록. T-D-002(TDD 예외 승인)만 반드시 확인
+
+### 0-4. Decision Walk-through
+선택에 따라 `AskUserQuestion`으로 결정 수집 (최대 4개/배치, 의존성 순서 준수).
+- T-D-001은 Step 1에서 테스트 플랜 테이블 완성 후 사용자에게 확인한다.
+- T-D-002는 "When to Use" 섹션의 예외 상황 발생 시 트리거된다.
+
+### 0-5. Record Decisions
+`factory/tdd/decisions.md`에 기록:
+
+| ID | Decision | Choice | Rationale | Decided By | Date |
+|----|----------|--------|-----------|------------|------|
+
+### 0-6. Proceed
+모든 선행 결정 기록 후 Step 1로 진행.
+
+---
+
 ## Step 1: Extract Test Plan from Acceptance Criteria
 
 `factory/architect/architect.md`의 수용 기준(Given/When/Then) section 8에서 테스트 플랜을 추출한다.
@@ -383,7 +436,8 @@ PASS
 
 - Test files (per project conventions)
 - `factory/tdd/` — TDD session notes, test plan tracking (optional)
+- `factory/tdd/decisions.md` — 의사결정 기록
 
 ## Completion
 
-TDD가 완료되었습니다. 모든 수용 기준에 대한 테스트가 통과합니다.
+TDD가 완료되었습니다. 모든 수용 기준에 대한 테스트가 통과합니다. 결정 기록은 `factory/tdd/decisions.md`에 저장되었습니다.

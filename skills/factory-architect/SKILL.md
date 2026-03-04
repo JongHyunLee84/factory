@@ -33,6 +33,58 @@ Read these files BEFORE any design work (Read-first principle).
 
 ## Execution Flow
 
+### Step 0: Decision Agenda
+
+> 공유 프로토콜: `settings/templates/decision-agenda.md`
+
+#### 0-1. Read Prior Decisions
+이전 스킬의 decisions 파일을 읽는다 (있으면):
+- `factory/research/decisions.md`
+- `factory/prd/decisions.md`
+- `factory/analysis/decisions.md`
+
+이미 결정된 항목은 "Pre-decided"로 표시하고 skip.
+
+#### 0-2. Generate Agenda
+입력과 컨텍스트를 분석하여 아래 결정 항목을 기본 Agenda로 구성.
+
+**Tier 1 (Strategic — 사용자 필수):**
+
+| ID | Decision | 비위임 |
+|----|----------|--------|
+| AR-D-001 | Feature type 분류 확인 — New Feature / Extension / Simple Addition | No |
+| AR-D-002 | 리서치 위임 트리거 — 기술 조사가 필요한지 여부 | No |
+| AR-D-003 | **ADR 옵션 선택** (트리거 시) — 사용자가 옵션 A/B/C 중 선택 | Yes (기술 스택) |
+
+**Tier 2 (Tactical — AI 기본값 + 사용자 오버라이드):**
+
+| ID | Decision | AI 기본값 |
+|----|----------|----------|
+| AR-D-004 | 설계 깊이 (Full/Light/Minimal) | Feature Type 분류에 따라 자동 결정 |
+
+#### 0-3. Agenda Overview
+`AskUserQuestion`으로 진행 방식 확인:
+- **핵심만 검토 (Recommended)**: Tier 1만 직접, Tier 2는 AI 기본값
+- **전체 검토**: Tier 1 + Tier 2 모든 결정을 직접
+- **알아서 해줘**: AI가 결정하고 근거 기록. 기술 스택, GO/NO-GO는 반드시 확인
+
+#### 0-4. Decision Walk-through
+선택에 따라 `AskUserQuestion`으로 결정 수집 (최대 4개/배치, 의존성 순서 준수).
+- AR-D-001은 Step 1에서 분류 후 사용자에게 확인한다.
+- AR-D-002는 Step 2 진입 조건에서 사용자에게 확인한다.
+- AR-D-003은 Step 7에서 ADR이 트리거될 때 옵션 제시와 함께 질문한다.
+
+#### 0-5. Record Decisions
+`factory/architect/decisions.md`에 기록:
+
+| ID | Decision | Choice | Rationale | Decided By | Date |
+|----|----------|--------|-----------|------------|------|
+
+#### 0-6. Proceed
+모든 선행 결정 기록 후 Step 1로 진행.
+
+---
+
 ### Step 1: Feature Type Classification
 
 Based on analysis results, classify:
@@ -194,8 +246,9 @@ After the self-check passes, present the design summary and the review findings 
 ## Output
 
 - `factory/architect/architect.md` — design document (decisions only)
+- `factory/architect/decisions.md` — 의사결정 기록
 - ADR in architect.md section 11 (if triggered)
 
 ## Completion
 
-설계가 완료되었습니다. 결과는 `factory/architect/architect.md`에 저장되었습니다.
+설계가 완료되었습니다. 결과는 `factory/architect/architect.md`와 `factory/architect/decisions.md`에 저장되었습니다.

@@ -33,6 +33,59 @@ You are the Factory development guide. You oversee implementation work, ensuring
 
 ## Execution Flow
 
+### Step 0: Decision Agenda
+
+> 공유 프로토콜: `settings/templates/decision-agenda.md`
+
+#### 0-1. Read Prior Decisions
+이전 스킬의 decisions 파일을 읽는다 (있으면):
+- `factory/prd/decisions.md`
+- `factory/analysis/decisions.md`
+- `factory/architect/decisions.md`
+- `factory/ui-design/decisions.md`
+- `factory/tdd/decisions.md`
+
+이미 결정된 항목은 "Pre-decided"로 표시하고 skip.
+
+#### 0-2. Generate Agenda
+입력과 컨텍스트를 분석하여 아래 결정 항목을 기본 Agenda로 구성.
+
+**Tier 1 (Strategic — 사용자 필수):**
+
+| ID | Decision | 비위임 |
+|----|----------|--------|
+| DV-D-001 | **구현 순서** — 의존성이 모호할 때 사용자가 우선순위 결정 | No |
+| DV-D-002 | **에스컬레이션 응답** — 설계 범위 밖 이슈 발견 시 사용자 결정 | Yes |
+
+**Tier 2 (Tactical — AI 기본값 + 사용자 오버라이드):**
+
+| ID | Decision | AI 기본값 |
+|----|----------|----------|
+| DV-D-003 | 중복 처리 방향 (4-6점 시) | 공유 추상화 추출 후 구현 |
+| DV-D-004 | 컨벤션 추론 확인 | analysis.md의 Conventions Detected 기반 |
+
+#### 0-3. Agenda Overview
+`AskUserQuestion`으로 진행 방식 확인:
+- **핵심만 검토 (Recommended)**: Tier 1만 직접, Tier 2는 AI 기본값
+- **전체 검토**: Tier 1 + Tier 2 모든 결정을 직접
+- **알아서 해줘**: AI가 결정하고 근거 기록. DV-D-002(에스컬레이션 응답)만 반드시 확인
+
+#### 0-4. Decision Walk-through
+선택에 따라 `AskUserQuestion`으로 결정 수집 (최대 4개/배치, 의존성 순서 준수).
+- DV-D-001은 Step 1에서 구현 체크리스트 생성 후, 의존성 순서가 모호한 경우에만 트리거된다.
+- DV-D-002는 Step 2의 Escalation Check에서 "Yes" 항목 발생 시 `AskUserQuestion`으로 사용자 결정을 구한다 (기존 "STOP and confirm" → 구조화된 질문으로 전환).
+
+#### 0-5. Record Decisions
+`factory/develop/decisions.md`에 기록:
+
+| ID | Decision | Choice | Rationale | Decided By | Date |
+|----|----------|--------|-----------|------------|------|
+
+#### 0-6. Proceed
+모든 선행 결정 기록 후 Step 1로 진행.
+
+---
+
 ### Step 1: Implementation Checklist
 
 From `factory/architect/architect.md`, extract all components and interfaces into an ordered implementation checklist:
@@ -105,8 +158,9 @@ After all components are implemented:
 
 ## Output
 
-Implementation is done directly in the project codebase.
-Detailed notes or intermediate artifacts may be saved to `factory/develop/`.
+- Implementation is done directly in the project codebase.
+- `factory/develop/decisions.md` — 의사결정 기록
+- Detailed notes or intermediate artifacts may be saved to `factory/develop/`.
 
 Inform:
 "구현이 완료되었습니다. `/factory-e2e`로 E2E 테스트를 진행하거나 `/factory-code-review`로 코드 리뷰를 실행하세요."

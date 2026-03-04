@@ -42,6 +42,57 @@ NEVER use these words in analysis output:
 
 ## Execution Flow
 
+### Step 0: Decision Agenda
+
+> 공유 프로토콜: `settings/templates/decision-agenda.md`
+
+#### 0-1. Read Prior Decisions
+이전 스킬의 decisions 파일을 읽는다 (있으면):
+- `factory/research/decisions.md`
+- `factory/prd/decisions.md`
+
+이미 결정된 항목은 "Pre-decided"로 표시하고 skip.
+
+#### 0-2. Generate Agenda
+입력과 컨텍스트를 분석하여 아래 결정 항목을 기본 Agenda로 구성. 프로젝트 맥락에 따라 항목을 추가/제거할 수 있다.
+
+**Tier 1 (Strategic — 사용자 필수):**
+
+| ID | Decision | 비위임 |
+|----|----------|--------|
+| A-D-001 | **구현 접근법 선택 (A/B/C)** — Step 4에서 3개 옵션 제시 후 사용자가 선택 | Yes |
+| A-D-002 | 중복 점수 4-6 시 처리 방향 — 추출 vs 독립 구현 vs 재사용 | No |
+
+**Tier 2 (Tactical — AI 기본값 + 사용자 오버라이드):**
+
+| ID | Decision | AI 기본값 |
+|----|----------|----------|
+| A-D-003 | Scale 분류 확인 | Step 2에서 파일 수 기반 자동 분류 |
+| A-D-004 | 요구사항별 실현가능성 판단 | Gap Tag 기반 자동 분류 |
+| A-D-005 | 서베이 범위 (스캔 디렉토리) | 프로젝트 루트 전체 |
+
+#### 0-3. Agenda Overview
+`AskUserQuestion`으로 진행 방식 확인:
+- **핵심만 검토 (Recommended)**: Tier 1만 직접, Tier 2는 AI 기본값
+- **전체 검토**: Tier 1 + Tier 2 모든 결정을 직접
+- **알아서 해줘**: AI가 결정하고 근거 기록. A-D-001(구현 접근법 선택)만 반드시 확인
+
+#### 0-4. Decision Walk-through
+선택에 따라 `AskUserQuestion`으로 결정 수집 (최대 4개/배치, 의존성 순서 준수).
+- A-D-001은 Step 4 완료 후 3개 옵션 제시와 함께 질문한다.
+- A-D-002는 Step 6 Duplication Check 결과에 따라 트리거된다 (점수 4-6일 때만).
+
+#### 0-5. Record Decisions
+`factory/analysis/decisions.md`에 기록:
+
+| ID | Decision | Choice | Rationale | Decided By | Date |
+|----|----------|--------|-----------|------------|------|
+
+#### 0-6. Proceed
+모든 선행 결정 기록 후 Step 1로 진행. A-D-001, A-D-002는 해당 Step에서 결정.
+
+---
+
 ### Step 1: Current State Survey (Read-first)
 
 Grep/Glob으로 프로젝트 코드베이스를 스캔한다:
@@ -132,6 +183,7 @@ Gap Analysis Framework 적용: `settings/rules/gap-analysis.md`
 
 ## Output
 
-`factory/analysis/analysis.md`에 작성 (`settings/templates/factory-analysis.md` 템플릿 사용).
+- `factory/analysis/analysis.md`에 작성 (`settings/templates/factory-analysis.md` 템플릿 사용).
+- `factory/analysis/decisions.md`에 결정 기록.
 
-분석이 완료되었습니다. 결과는 `factory/analysis/analysis.md`에 저장되었습니다.
+분석이 완료되었습니다. 결과는 `factory/analysis/analysis.md`와 `factory/analysis/decisions.md`에 저장되었습니다.
